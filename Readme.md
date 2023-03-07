@@ -15,3 +15,20 @@ Enviar un link a un repositorio en Github que contenga lo siguiente:
 - Una aplicación Django
 - Una historia de commits que demuestre el orden de implementación
 - Un archivo README que explique como funciona el proyecto
+
+# Como Ejecutar el proyecto
+Primero Eejcuta el build del proyecto
+```
+make build.dev
+```
+Luego Corre el proyecto
+```
+make run.local
+```
+Puedes visitar la aplciacion en http://localhost:8009/
+
+Para ejecutar test
+```
+make build.test
+make run.test
+```
