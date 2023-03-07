@@ -2,18 +2,32 @@
 name = "monet"
 version = "0.1.0"
 description = ""
-authors = ["Nicolás Eduardo Rondón Ortiz <nicolas.rondon@crehana.com>"]
+authors = ["Nicolás Eduardo Rondón Ortiz <nicolas.rondon@monet.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
 django = "^4.1.7"
-pytest = "^7.2.2"
+psycopg2 = "^2.9.5"
+djangorestframework = "^3.14.0"
+
+
+
+
+
+[tool.poetry.group.linters.dependencies]
 pre-commit = "^3.1.1"
+
+[tool.poetry.group.customlinters.dependencies]
 black = "^23.1.0"
 flake8 = "^6.0.0"
 isort = "^5.12.0"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.2"
+coverage = "^6.3.2"
+pytest-cov = "^3.0.0"
+pytest-django = "^4.5.2"
 
 [build-system]
 requires = ["poetry-core"]

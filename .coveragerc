@@ -1,0 +1,11 @@
+[run]
+branch = True
+data_file = .coverage
+omit =
+    tests/*
+
+[html]
+directory = htmlcov
+
+[report]
+fail_under = 90

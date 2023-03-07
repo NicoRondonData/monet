@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  monet:
+    build:
+      context: .
+      target: development
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8009:8000
+    env_file:
+      - .env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=monet
+      - POSTGRES_PASSWORD=monet
+      - POSTGRES_DB=monet_dev
+volumes:
+  postgres_data:
