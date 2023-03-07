@@ -15,6 +15,7 @@ djangorestframework = "^3.14.0"
 
 
 
+
 [tool.poetry.group.linters.dependencies]
 pre-commit = "^3.1.1"
 
