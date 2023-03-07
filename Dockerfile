@@ -17,7 +17,6 @@ RUN poetry self add poetry-plugin-export
 RUN poetry --version
 
 
-WORKDIR /app
 
 # poetry dependencies
 COPY poetry.lock pyproject.toml ./

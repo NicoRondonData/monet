@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "foo")
 
 DEBUG = int(os.environ.get("DEBUG", default=0))
+DJANGO_ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS")
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS.split(" ") if DJANGO_ALLOWED_HOSTS else []
 AUTH_USER_MODEL = "students.Student"
 # Application definition
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.api",
     "apps.students",
+    "apps.exams",
 ]
 
 MIDDLEWARE = [
@@ -80,8 +82,14 @@ DATABASES = {
         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
-    }
+    },
+    "test": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "test_db.sqlite3",
+    },
 }
+if "test" in sys.argv:
+    DATABASES["default"] = DATABASES["test"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

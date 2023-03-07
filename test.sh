@@ -9,4 +9,4 @@ echo "Junit Path: $JUNIT_PATH"
 echo "Coverage Path: $COVERAGE_PATH"
 
 echo "Running tests"
-pytest --cov --cov-report=term-missing -v
+pytest --cov --cov-report=term-missing -v -s

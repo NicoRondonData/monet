@@ -36,7 +36,7 @@ lint.docker:
 
 .PHONY: test.local
 test.local:
-	./test.sh
+	docker-compose exec monet ./test.sh
 
 .PHONY: build.test
 build.test: ## Build a docker image for testing (Requires BASE_IMAGE env variable).
