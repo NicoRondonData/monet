@@ -10,6 +10,8 @@ RUN apt-get update && \
     apt-get install -y libpq-dev gcc postgresql-client && \
     apt-get install -y netcat && \
     rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tests/
 # install poetry
 RUN curl -sSL https://install.python-poetry.org | python - --version 1.3.2
 ENV PATH="/root/.local/bin:$PATH"
@@ -22,7 +24,7 @@ RUN poetry --version
 COPY poetry.lock pyproject.toml ./
 
 FROM base as development
-RUN poetry install --without test,linters,customlinters --no-root
+RUN poetry install   --no-root
 COPY . .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

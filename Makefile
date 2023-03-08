@@ -28,7 +28,7 @@ build.linters: ## Build a docker image for linters.
 
 .PHONY: lint.local
 lint.local:
-	poetry run pre-commit run --all-files
+	docker-compose exec monet poetry run pre-commit run --all-files
 
 .PHONY: lint.docker
 lint.docker:
@@ -38,13 +38,6 @@ lint.docker:
 test.local:
 	docker-compose exec monet ./test.sh
 
-.PHONY: build.test
-build.test: ## Build a docker image for testing (Requires BASE_IMAGE env variable).
-	docker build --pull \
-		--build-arg BUILDKIT_INLINE_CACHE=1 \
-		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
-		--target test \
-		-t $(APP_NAME)-test .
 
 .PHONY: build.dev
 build.dev:
